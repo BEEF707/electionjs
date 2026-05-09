@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "node --test",
-    "test:api": "node --test tests/integration/api/*.test.js"
+    "test": "jest",
+    "test:api": "jest tests/integration/api",
+    "test:backend": "jest tests",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,5 +17,10 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
   }
 }
