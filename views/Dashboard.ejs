@@ -1,0 +1,108 @@
+Update to dashboard.ejs
+<!DOCTYPE html>
+<html>
+  <!-- head partial gets included here -->
+  <%- include('./partials/head') -%>
+  <body>
+    <!-- Include menu here -->
+    <%- include('./partials/menu') -%>
+
+    <h1> Dashboard </h1>
+    <h2> Name: <%= username %> </h2>
+
+    <h2> Past logins</h2>
+    <div class="table-responsive">
+    <table class="table table-dark table-hover">
+    <%for (var login in userinfo.lastLoginTime) {%>
+        <tr>
+        <td><%= userinfo.lastLoginTime[login] %></td>
+        <td><%= userinfo.lastIP[login] %></td>
+        </tr>
+    <% } %>
+    </table>
+
+    <button id="showEditBtn" class="btn btn-primary">Edit Profile</button>
+    <form id="editForm" style="display:none; margin-top:20px;" method="POST" action="/dashboard/edit">
+      <div class="form-group">
+        <label for="editEmail">Email</label>
+        <input type="email" class="form-control" id="editEmail" name="email" value="<%= userinfo.email %>">
+      </div>
+      <div class="form-group">
+        <label for="editAddress">Address</label>
+        <input type="text" class="form-control" id="editAddress" name="address" value="<%= userinfo.address %>">
+      </div>
+      <div class="form-group">
+        <label for="editCity">City</label>
+        <input type="text" class="form-control" id="editCity" name="city" value="<%= userinfo.city %>">
+      </div>
+      <div class="form-group">
+        <label for="editState">State</label>
+        <input type="text" class="form-control" id="editState" name="state" value="<%= userinfo.state %>">
+      </div>
+      <div class="form-group">
+        <label for="editZip">Zip</label>
+        <input type="text" class="form-control" id="editZip" name="zip" value="<%= userinfo.zip %>">
+      </div>
+      <button type="submit" class="btn btn-success">Save</button>
+      <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+    </form>
+    <script>
+      document.getElementById('showEditBtn').onclick = function() {
+        document.getElementById('editForm').style.display = 'block';
+        this.style.display = 'none';
+      };
+      document.getElementById('cancelEditBtn').onclick = function() {
+        document.getElementById('editForm').style.display = 'none';
+        document.getElementById('showEditBtn').style.display = 'inline-block';
+      };
+    </script>
+    </div>
+
+    <% if (role === 'super' && allUsers) { %>
+      <h2>All Users</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Zip</th>
+              <th>Change Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% allUsers.forEach(function(user) { %>
+              <tr>
+                <td><%= user.username %></td>
+                <td><%= user.email %></td>
+                <td><%= user.role %></td>
+                <td><%= user.city %></td>
+                <td><%= user.state %></td>
+                <td><%= user.zip %></td>
+                <td>
+                  <% if (user.role !== 'super') { %>
+                    <form method="POST" action="/dashboard/changerole" style="display:inline-block;">
+                      <input type="hidden" name="username" value="<%= user.username %>">
+                      <select name="role" class="form-select form-select-sm d-inline w-auto" required>
+                        <option value="voter" <%= user.role === 'voter' ? 'selected' : '' %>>voter</option>
+                        <option value="reporter" <%= user.role === 'reporter' ? 'selected' : '' %>>reporter</option>
+                        <option value="moderator" <%= user.role === 'moderator' ? 'selected' : '' %>>moderator</option>
+                        <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>admin</option>
+                      </select>
+                      <button type="submit" class="btn btn-sm btn-primary">Change</button>
+                    </form>
+                  <% } else { %>
+                    <span class="text-muted">super</span>
+                  <% } %>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </body>
+</html>
