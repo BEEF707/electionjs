@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const API_BASE_URL = (process.env.API_BASE_URL || 'https://elections-irv.api.hscc.bdpa.org/v1').replace(/\/+$/, '');
+const API_BASE_URL = process.env.API_BASE_URL;
 
 module.exports = {
   API_BASE_URL,
