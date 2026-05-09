@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./partials/head') -%>
+  <body>
+    <%- include('./partials/menu') -%>
+    
+    <!-- This h1 tag has embedded Javascript passing a title variable -->
+    <div class="container mt-5">
+      <h1><%= title %></h1>
+      <form action="/register" method="post">
+<label for="username">username:</label> <input id="username" name="username" type="text"><br><br>
+<label for="email">email:</label> <input id="email" name="email" type="email"><br><br>
+<label for="password">password:</label> <input id="password" name="password" type="password"><br><br>
+<label for="birthdate">birthdate:</label> <input id="birthdate" name="birthdate" type="date"><br><br>
+<label for="age">age:</label> <input id="age" name="age" min="10" max="100"  type="number"><br><br>
+<label for="interests">interests:</label> <br>
+<input id="interests" name="interests" type="checkbox" value="games">Games<br>
+<input id="interests" name="interests" type="checkbox" value="sports">Sports<br>
+<input id="interests" name="interests" type="checkbox" value="music">Music<br><br>
+<label for="grade">grade:</label><br>
+<input id="grade" name="grade" type="radio" value="9">9<br>
+<input id="grade" name="grade" type="radio" value="10">10<br>
+<input id="grade" name="grade" type="radio" value="11">11<br>
+<input id="grade" name="grade" type="radio" value="12">12<br><br>
+
+<button type="submit">Submit</button>
+
+</form>
+    </div>
+
+  </body>
+</html>
