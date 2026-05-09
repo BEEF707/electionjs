@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Including head partial -->
+    <%- include('./partials/head') -%> 
+
+  </head>
+  <body>
+    <%- include('./partials/navmenu') -%>
+
+    <!-- This h1 tag has embedded Javascript passing a title variable -->
+    <h1><%= title %></h1>
+    <p> <%= result %></p>
+
+    <form action="/login" method="POST">
+        <label for="username"> Username: </label>
+        <input type="text" id="username">
+        <label for="password"> Password: </label>
+        <input type="password" id="password">
+        <button type="submit"> Submit </button>
+    </form>
+
+</body>
+</html>

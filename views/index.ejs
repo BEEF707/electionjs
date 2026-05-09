@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- Including head partial -->
+    <%- include('./partials/head') -%>
+    <script src="togglescript.js" ></script>
   </head>
   <body>
+    <%- include('./partials/navmenu') -%>
+    <div class="containter">
+    <div class="container">
+    <!-- This h1 tag has embedded Javascript passing a title variable -->
     <h1><%= title %></h1>
+    <h2>2026 Milwaukee HSCC season</h2>
     <p>Welcome to <%= title %></p>
+    <!-- Links section set up for styling -->
+    <div class="linkssection">
+       <ul>
+         <li> <a href="http://www.bdpa.org" target="_blank"> BDPA </a> </li>
+         <li> <a href="http://www.bdpamke.org" target="_blank"> BDPA Milwaukee </a> </li>
+         <li> <a href="hsccref"> HSCC Reference Page </a> </li>
+       </ul> <!-- Bulleted List ends -->
+    </div> <!-- linkssection division ends -->
+    <button id="contrast-toggle">Contrast Boost</button>
+  </div> <!-- end containter -->
+  <script src="/javascripts/togglescript.js" ></script>
   </body>
 </html>

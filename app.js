@@ -4,8 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// MUST CREATE ROUTER FOR EACH NEW PAGE
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var hsccrefRouter = require('./routes/hsccref');
+var registerRouter = require('./routes/register');
 
 var app = express();
 
@@ -19,8 +22,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// MUST USE ROUTERS CREATED
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/hsccref', hsccrefRouter);
+app.use('/register', registerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

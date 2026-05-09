@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Including head partial -->
+    <%- include('./partials/head') -%> 
+
+  </head>
+  <body>
+    <%- include('./partials/navmenu') -%>
+
+
+    <!-- This h1 tag has embedded Javascript passing a title variable -->
+    <h1><%= title %></h1>
+<form action="/register" name="register" method="post" onsubmit="return testFormValidate()">
+<label for="username">username:</label> <input id="username" name="username" type="text" required><br><br>
+<label for="email">email:</label> <input id="email" name="email" type="email" required><br><br>
+<label for="password">password:</label> <input id="password" name="password" type="password" required>
+
+Password strength:
+<span id="pwstrength"> Weak </span>
+
+<br><br>
+<label for="birthdate">birthdate:</label> <input id="birthdate" name="birthdate" type="date" required max="2026-03-20"><br><br>
+<label for="age">age:</label> <input id="age" name="age" min="10" max="100"  type="number"><br><br>
+<!-- Replacing age with gender 3/28/26 -->
+<label for="gender"> Gender: </label>
+<input id="gender" name="gender" type="radio" value="male" required> Male
+<input id="gender" name="gender" type="radio" value="female"> Female <br>
+<br>
+
+<label for="interests">interests:</label> <br>
+<input id="interests" name="interests" type="checkbox" value="games">Games<br>
+<input id="interests" name="interests" type="checkbox" value="sports">Sports<br>
+<input id="interests" name="interests" type="checkbox" value="music">Music<br><br>
+<label for="grade">grade:</label><br>
+<input id="grade" name="grade" type="radio" value="9">9<br>
+<input id="grade" name="grade" type="radio" value="10">10<br>
+<input id="grade" name="grade" type="radio" value="11">11<br>
+<input id="grade" name="grade" type="radio" value="12">12<br><br>
+
+<button type="submit">Submit</button>
+
+</form>
+
+<p> Driver License Code: 
+  <% if (typeof licensecode !== 'undefined') { %>
+    <%= licensecode %> 
+  <% } %>
+  
+  </p>
+
+
+    <script src="/javascripts/registerscript.js"></script> 
+  </body>
+</html>

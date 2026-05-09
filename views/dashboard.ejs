@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <h1>Welcome, <%= user.username %> (<%= user.role %>)</h1>
+  <!-- Role-specific links -->
+  <% if (user.role === 'voter') { %>
+    <a href="/elections">View Elections</a>
+  <% } %>
+  <% if (user.role === 'administrator') { %>
+    <a href="/elections/admin">Manage Elections</a>
+  <% } %>
+  <% if (user.role === 'reporter') { %>
+    <a href="/elections/history">View History</a>
+  <% } %>
+  <a href="/auth/logout">Logout</a>
+</body>
+</html>
