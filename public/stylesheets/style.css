@@ -1,8 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+:root {
+--main-font: 'Fredoka One', cursive;
+--link-color: #637d88;
+--primary-bg-color-dm: #657dac;
+--secondary-bg-color-dm: #8da4b4;
+--primary-text-color-dm: #657dac;
+--secondary-text-color-dm: #2d3748;
+
+--primary-bg-color-lm: #7990b3;
+--secondary-bg-color-lm: #b6c6f3;
+--primary-text-color-lm: #f5f6f7;
+--secondary-text-color-lm: #1e447e;
+--accent-color: #657dac;
+}
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: var(--main-font);
+  font-size: 14px;
+  background-color: var(--primary-bg-color-lm);
+  color: var(--primary-text-color-lm);
 }
 
 a {
-  color: #00B7FF;
+  color: var(--secondary-bg-color-lm);
 }
+
+/* Footer with owner name */
+.site-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100px;
+  pointer-events: none;
+}
+.site-footer .owner-name {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: var(--primary-text-color-lm);
+  background: rgba(81, 89, 129, 0.6);
+  padding: 6px 12px;
+  border-radius: 12px;
+  pointer-events: auto;
+}
+.slide {
+  position: relative;
+  cursor: pointer;
+  background: linear-gradient(90deg, 
+    transparent 0%, transparent 14.28%,
+    #ff6b9d 14.28%, #ff6b9d 28.57%,
+    transparent 28.57%, transparent 42.85%,
+    #4ecdc4 42.85%, #4ecdc4 57.14%,
+    transparent 57.14%, transparent 71.42%,
+    #ffe66d 71.42%, #ffe66d 85.71%,
+    transparent 85.71%, transparent 100%);
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: wave-hop 2s ease-in-out infinite;
+}
+
+@keyframes wave-hop {
+  0%, 100% { background-position: 0% 0%; }
+  25% { background-position: -50% 0%; }
+  50% { background-position: -100% 0%; }
+  75% { background-position: -150% 0%; }
+}
+
+/* {
+background-color: var(--secondary-bg-color-dm);
+padding: 1.5rem;
+border: 1px var(--accent color) solid;
+margin: 1.5rem;
+} */
+
+.linksection {
+  background-color: var(--secondary-bg-color-dm);
+  border: 1px var(--accent-color) solid;
+  margin: 1.5rem;
+}
+.linksection ul {
+  margin-top: 1rem;
+}
+
+#bdpahistory, #htmltags, #numconversion {
+  background-color: var(--secondary-bg-color-dm);
+  padding: 1.5rem;
+  border: 1px var(--accent-color) solid;
+  margin: 1.5rem;
+}
+
+.high-contrast #bdpahistory, .high-contrast #htmltags, .high-contrast #numconversion, .high-contrast .linkssection {
+  background-color: var(--primary-bg-color-lm);
+  color: var(--primary-text-color-lm);
+}
+
+.high-contrast .nav-item ,.high-contrast .nav-link{
+  background-color: var(--primary-bg-color-lm);
+  color: var(--primary-text-color-lm);
+}
+
+.linkssection {
+  background-color: var(--secondary-bg-color-dm);
+  border: 1px var(--accent-color) solid;
+  margin: 1.5rem;
+}
+
+.linkssection ul {
+  margin-top: 1rem;
+}
+
+.nav-link {
+  color:var(--primary-text-color-dm);
+}
+
+
+
