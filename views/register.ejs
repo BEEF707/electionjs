@@ -4,28 +4,39 @@
   <body>
     <%- include('./partials/menu') -%>
     
-    <!-- This h1 tag has embedded Javascript passing a title variable -->
     <div class="container mt-5">
       <h1><%= title %></h1>
+      <% if (error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
       <form action="/register" method="post">
-<label for="username">username:</label> <input id="username" name="username" type="text"><br><br>
-<label for="email">email:</label> <input id="email" name="email" type="email"><br><br>
-<label for="password">password:</label> <input id="password" name="password" type="password"><br><br>
-<label for="birthdate">birthdate:</label> <input id="birthdate" name="birthdate" type="date"><br><br>
-<label for="age">age:</label> <input id="age" name="age" min="10" max="100"  type="number"><br><br>
-<label for="interests">interests:</label> <br>
-<input id="interests" name="interests" type="checkbox" value="games">Games<br>
-<input id="interests" name="interests" type="checkbox" value="sports">Sports<br>
-<input id="interests" name="interests" type="checkbox" value="music">Music<br><br>
-<label for="grade">grade:</label><br>
-<input id="grade" name="grade" type="radio" value="9">9<br>
-<input id="grade" name="grade" type="radio" value="10">10<br>
-<input id="grade" name="grade" type="radio" value="11">11<br>
-<input id="grade" name="grade" type="radio" value="12">12<br><br>
+        <label for="username">username:</label>
+        <input id="username" name="username" type="text" value="<%= formData.username || '' %>"><br><br>
+        <label for="email">email:</label>
+        <input id="email" name="email" type="email" value="<%= formData.email || '' %>"><br><br>
+        <label for="password">password:</label>
+        <input id="password" name="password" type="password"><br><br>
+        <label for="role">role:</label>
+        <select id="role" name="role">
+          <option value="voter" <%= formData.role === 'voter' ? 'selected' : '' %>>voter</option>
+          <option value="moderator" <%= formData.role === 'moderator' ? 'selected' : '' %>>moderator</option>
+        </select><br><br>
+        <label for="birthdate">birthdate:</label>
+        <input id="birthdate" name="birthdate" type="date" value="<%= formData.birthdate || '' %>"><br><br>
+        <label for="age">age:</label>
+        <input id="age" name="age" min="10" max="100" type="number" value="<%= formData.age || '' %>"><br><br>
+        <label for="interests">interests:</label> <br>
+        <input id="interests" name="interests" type="checkbox" value="games">Games<br>
+        <input id="interests" name="interests" type="checkbox" value="sports">Sports<br>
+        <input id="interests" name="interests" type="checkbox" value="music">Music<br><br>
+        <label for="grade">grade:</label><br>
+        <input id="grade" name="grade" type="radio" value="9" <%= formData.grade === '9' ? 'checked' : '' %>>9<br>
+        <input id="grade" name="grade" type="radio" value="10" <%= formData.grade === '10' ? 'checked' : '' %>>10<br>
+        <input id="grade" name="grade" type="radio" value="11" <%= formData.grade === '11' ? 'checked' : '' %>>11<br>
+        <input id="grade" name="grade" type="radio" value="12" <%= formData.grade === '12' ? 'checked' : '' %>>12<br><br>
 
-<button type="submit">Submit</button>
-
-</form>
+        <button type="submit">Submit</button>
+      </form>
     </div>
 
   </body>

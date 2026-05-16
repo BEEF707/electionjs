@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var roleplacementRouter = require('./routes/roleplacement');
+var dashboardRouter = require('./routes/dashboard');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/roleplacement', roleplacementRouter);
+app.use('/dashboard', dashboardRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
