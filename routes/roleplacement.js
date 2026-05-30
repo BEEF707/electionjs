@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET roleplacement page. */
 router.get('/', function(req, res, next) {
-  res.render('Utils/roleplacement', { title: 'Role Placement' });
+  res.render('roleplacement', { title: 'Role Placement' });
 });
 
 module.exports = router;

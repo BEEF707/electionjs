@@ -1,3 +1,203 @@
+:root {
+  color-scheme: dark;
+  color: #eef2f7;
+  background-color: #06121f;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, rgba(73, 148, 255, 0.18), transparent 20%),
+    linear-gradient(180deg, #071827 0%, #091a2d 55%, #081124 100%);
+  color: #eef2f7;
+}
+
+a {
+  color: #7ecbff;
+}
+
+a:hover,
+a:focus {
+  color: #bde4ff;
+  text-decoration: none;
+}
+
+.navbar {
+  background: rgba(6, 18, 34, 0.95) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.nav-link {
+  color: #cbd7e0 !important;
+}
+
+.nav-link:hover,
+.nav-link:focus,
+.nav-item.show .nav-link {
+  color: #ffffff !important;
+}
+
+.container {
+  padding: 2rem 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #f3f8ff;
+}
+
+.card,
+.table,
+.form-control,
+.btn,
+.alert,
+.container,
+nav {
+  border-radius: 1rem;
+}
+
+.card {
+  background: rgba(8, 18, 33, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.table {
+  background: rgba(6, 14, 26, 0.96);
+}
+
+.table th,
+.table td {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #eef2f7;
+}
+
+.form-control:focus {
+  border-color: #78b8ff;
+  box-shadow: 0 0 0 0.2rem rgba(120, 184, 255, 0.24);
+}
+
+.btn {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn:hover,
+.btn:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
+}
+
+.alert {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(20, 36, 56, 0.9);
+}
+
+form {
+  margin-top: 1rem;
+}
+
+.election-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  margin: 1.5rem 0;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.election-card {
+  background: rgba(12, 24, 42, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  border-radius: 1.75rem;
+  box-shadow: 0 32px 70px rgba(0, 0, 0, 0.28);
+  padding: 1.6rem;
+  width: clamp(22rem, 36%, 32rem);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.election-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(126, 203, 255, 0.65);
+  box-shadow: 0 36px 82px rgba(0, 0, 0, 0.32);
+}
+
+.election-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.election-card h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #f3f8ff;
+}
+
+.election-card p {
+  margin: 0;
+  color: #d8e4f1;
+  line-height: 1.6;
+}
+
+.special-word-card {
+  background: rgba(34, 58, 92, 0.95);
+  border: 1px solid rgba(126, 203, 255, 0.18);
+  border-radius: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.8rem;
+  box-shadow: 0 22px 48px rgba(5, 15, 32, 0.25);
+}
+
+.special-word-badge {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.5rem 0.8rem;
+  font-weight: 600;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0.5rem rgba(255, 255, 255, 0.06);
+}
+
+.special-word-card h2 {
+  margin: 0 0 0.5rem;
+  color: #d8ebff;
+}
+
+.special-word-card p {
+  margin: 0;
+  color: #c8d9ed;
+  line-height: 1.7;
+}
+
+.election-card small {
+  color: #9bb0c8;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 :root {

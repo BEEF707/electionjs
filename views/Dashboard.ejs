@@ -88,7 +88,6 @@ Update to dashboard.ejs
                       <input type="hidden" name="username" value="<%= user.username %>">
                       <select name="role" class="form-select form-select-sm d-inline w-auto" required>
                         <option value="voter" <%= user.role === 'voter' ? 'selected' : '' %>>voter</option>
-                        <option value="reporter" <%= user.role === 'reporter' ? 'selected' : '' %>>reporter</option>
                         <option value="moderator" <%= user.role === 'moderator' ? 'selected' : '' %>>moderator</option>
                         <option value="admin" <%= user.role === 'admin' ? 'selected' : '' %>>admin</option>
                       </select>
