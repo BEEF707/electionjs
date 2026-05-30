@@ -11,7 +11,11 @@ router.post('/', function(req, res, next) {
   var username = req.body.username;
   var email = req.body.email;
   var password = req.body.password;
-  var role = req.body.role || 'voter';
+  var role = req.body.role;
+  var validRoles = ['voter', 'moderator', 'admin'];
+  if (!validRoles.includes(role)) {
+    role = 'voter';
+  }
   var birthdate = req.body.birthdate || '';
   var age = req.body.age || '';
   var interests = req.body.interests || [];

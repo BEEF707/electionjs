@@ -6,62 +6,44 @@
     <!-- Include menu here -->
     <%- include('./partials/menu') -%>
 
-    <h1> Election view information </h1>
-    <div class="table-responsive">
-        <table class="table table-dark table-hover">
-            <!-- First row is for table heading (tr tag with th tag nested) -->
-        <tr>
-            <th> Election Title </th>
-            <th> Election ID </th>
-            <th> Election Description </th>
-        </tr>
+    <div class="container mt-4">
+      <h1>Election view information</h1>
+      <p class="lead">Current role: <strong><%= role || 'unknown' %></strong></p>
 
-        <!-- Create one row for each election in our ElectionsArray using a for loop -->
-        <%for (var result in ElectionsArray) {%>
-            <tr>
-                <td> <%= ElectionsArray[result].title %> </td>
-       
-                <td>
-                   
-                    <a href="/viewelection/<%= ElectionsArray[result].election_id %>">
-                    <%= ElectionsArray[result].election_id %>
-                    </a>
-                </td>
-               
-                <td> <%= ElectionsArray[result].description %> </td>
-       
-       
-       
-       
-       
-            </tr>
-       
-        <%}%> <!-- to close out for loop-->
-       
-       
-        </table>
+      <% if (restricted) { %>
+        <div class="alert alert-warning">
+          Moderators may access their Dashboard and History only. Election access is restricted.
         </div>
-
-        <% if (ElectionsArray && ElectionsArray.length > 0) { %>
-  <div class="d-flex justify-content-between mt-3">
-    <form method="get" action="/viewelection">
-      <button class="btn btn-outline-secondary" type="submit" <%= (!after) ? 'disabled' : '' %>>First</button>
-    </form>
-    <form method="get" action="/viewelection">
-      <% /* Previous button: disables if on first page (no after param) */ %>
-      <% if (typeof after !== 'string' || !after) { %>
-        <button class="btn btn-secondary" disabled>Previous</button>
       <% } else { %>
-        <button class="btn btn-secondary" type="submit">Previous</button>
-      <% } %>
-    </form>
-    <form method="get" action="/viewelection">
-      <% /* Next button: uses last election_id as after param */ %>
-      <input type="hidden" name="after" value="<%= ElectionsArray[ElectionsArray.length-1].election_id %>" />
-      <button class="btn btn-primary" type="submit">Next</button>
-    </form>
-  </div>
-<% } %>
+        <% if (!votingEnabled) { %>
+          <div class="alert alert-info">
+            Administrators can view elections but voting is disabled.
+          </div>
+        <% } %>
 
+        <% if (!ElectionsArray || ElectionsArray.length === 0) { %>
+          <div class="alert alert-secondary">No elections have been created yet.</div>
+        <% } else { %>
+          <div class="election-grid">
+            <% ElectionsArray.forEach(function(election) { %>
+              <article class="election-card" style="<%= election.cardStyle %>">
+                <div class="election-card-header">
+                  <h3><%= election.title %></h3>
+                  <span class="badge" style="<%= election.badgeStyle %>">ID <%= election.election_id %></span>
+                </div>
+                <p><%= election.description %></p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <a class="btn btn-sm btn-outline-light" href="/viewelection/<%= election.election_id %>">View</a>
+                  <small class="text-muted">Posted by <%= election.createdBy %></small>
+                </div>
+                <% if (election.specialWord) { %>
+                  <span class="badge special-word-badge" style="<%= election.badgeStyle %>"><%= election.specialWord %></span>
+                <% } %>
+              </article>
+            <% }); %>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
   </body>
 </html>

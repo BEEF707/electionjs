@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./partials/head') -%>
+  <body>
+    <%- include('./partials/menu') -%>
+
+    <div class="container mt-5">
+      <h1>Election Details</h1>
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title"><%= election.title %></h2>
+          <p class="card-text"><strong>ID:</strong> <%= election.election_id %></p>
+          <p class="card-text"><strong>Description:</strong> <%= election.description %></p>
+          <% if (election.specialWord) { %>
+            <p class="card-text"><strong>Special Word:</strong> <span class="text-info"><%= election.specialWord %></span></p>
+          <% } %>
+          <p class="card-text"><strong>Created by:</strong> <%= election.createdBy %></p>
+          <% if (role === 'voter') { %>
+            <div class="alert alert-success">You may vote in this election.</div>
+          <% } else if (role === 'admin') { %>
+            <div class="alert alert-info">Administrators can view this election but voting is disabled.</div>
+          <% } else { %>
+            <div class="alert alert-warning">Moderators can view election details but cannot cast votes.</div>
+          <% } %>
+          <a href="/elections" class="btn btn-secondary">Back to Elections</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

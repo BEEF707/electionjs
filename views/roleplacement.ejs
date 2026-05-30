@@ -6,8 +6,36 @@
 
     <div class="container mt-5">
       <h1><%= title %></h1>
-      <p>If password = "hscc" then user is admin, else user is regular.</p>
-      <p>This is just for demo purposes since we don't have a database or user storage yet.</p>
+
+      <section class="mb-4">
+        <h2>Voters</h2>
+        <ul>
+          <li>Are authenticated users who have already logged in.</li>
+          <li>Can access the full Election view and can vote.</li>
+          <li>Can access their own personalized Dashboard view.</li>
+          <li>Can access the History view.</li>
+        </ul>
+      </section>
+
+      <section class="mb-4">
+        <h2>Moderators</h2>
+        <ul>
+          <li>Are authenticated users who have already logged in.</li>
+          <li>Can access their own personalized Dashboard view.</li>
+          <li>Can access the History view.</li>
+          <li>Do not get voting access in the Election view.</li>
+        </ul>
+      </section>
+
+      <section class="mb-4">
+        <h2>Administrators</h2>
+        <ul>
+          <li>Are authenticated users who have already logged in.</li>
+          <li>Can access a limited Election view but cannot vote.</li>
+          <li>Can access their own personalized Dashboard view.</li>
+          <li>Can access the History view and any other relevant administrative views.</li>
+        </ul>
+      </section>
     </div>
   </body>
 </html>

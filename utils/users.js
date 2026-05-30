@@ -1,6 +1,22 @@
-const users = [];
+const users = [
+  {
+    username: 'numberZ',
+    email: 'numberz@example.com',
+    password: 'password',
+    role: 'moderator',
+    birthdate: '',
+    age: '',
+    interests: [],
+    grade: '',
+    city: '',
+    state: '',
+    zip: '',
+    lastLoginTime: {},
+    lastIP: {},
+  },
+];
 
-const allowedRoles = ['voter', 'moderator', 'reporter', 'admin', 'super'];
+const allowedRoles = ['voter', 'moderator', 'admin', 'super'];
 
 function findUser(username) {
   return users.find((user) => user.username === username);
