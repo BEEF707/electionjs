@@ -1,12 +1,24 @@
 var express = require('express');
 var router = express.Router();
-var { getElections, addElection, findElection } = require('../utils/elections');
+var { getElections, addElection, findElection, voteElection } = require('../utils/elections');
 
 function requireLogin(req, res, next) {
   if (req.cookies && req.cookies.loggedIn === 'true') {
     return next();
   }
   res.redirect('/login');
+}
+
+function requireRole(allowedRoles) {
+  return function(req, res, next) {
+    var userRole = req.cookies.role || '';
+    if (allowedRoles.includes(userRole)) {
+      return next();
+    }
+    var err = new Error('You do not have permission to perform this action.');
+    err.status = 403;
+    return next(err);
+  };
 }
 
 function getThemeForWord(word) {
@@ -126,7 +138,16 @@ router.post('/election/create', requireLogin, function(req, res, next) {
   var title = req.body.title;
   var description = req.body.description;
   var specialWord = req.body.specialWord || '';
+  var options = req.body['options[]'] || req.body.options || [];
   var username = req.cookies.username || 'unknown';
+
+  if (typeof options === 'string') {
+    options = [options];
+  }
+
+  options = Array.isArray(options)
+    ? options.map(function(option) { return String(option || '').trim(); }).filter(Boolean)
+    : [];
 
   if (!title || !description) {
     return res.render('createElection', {
@@ -136,11 +157,20 @@ router.post('/election/create', requireLogin, function(req, res, next) {
     });
   }
 
+  if (!options || options.length < 2) {
+    return res.render('createElection', {
+      title: 'Create Election',
+      error: 'Please enter at least two voteable options.',
+      formData: req.body,
+    });
+  }
+
   var newElection = {
     election_id: String(Date.now()),
     title: title,
     description: description,
     specialWord: specialWord,
+    options: options,
     createdBy: username,
   };
 
@@ -152,14 +182,46 @@ router.get('/viewelection/:id', requireLogin, function(req, res, next) {
   var role = req.cookies.role || '';
   var election = findElection(req.params.id);
   if (!election) {
-    return res.status(404).send('Election not found.');
+    var err = new Error('Election not found.');
+    err.status = 404;
+    return next(err);
   }
 
   res.render('viewElection', {
     title: 'View Election',
     election: styleElection(election),
     role: role,
+    message: req.query.vote === 'success' ? 'Vote submitted successfully!' : null,
+    error: req.query.error || null,
   });
+});
+
+router.post('/viewelection/:id/vote', requireLogin, function(req, res, next) {
+  var role = req.cookies.role || '';
+  if (role !== 'voter') {
+    var err = new Error('Only voters can cast ballots.');
+    err.status = 403;
+    return next(err);
+  }
+
+  var election = findElection(req.params.id);
+  if (!election) {
+    var err = new Error('Election not found.');
+    err.status = 404;
+    return next(err);
+  }
+
+  var selectedOption = req.body.selectedOption;
+  if (!selectedOption) {
+    return res.redirect('/viewelection/' + req.params.id + '?error=Please+select+an+option');
+  }
+
+  var voteResult = voteElection(req.params.id, selectedOption);
+  if (!voteResult) {
+    return res.redirect('/viewelection/' + req.params.id + '?error=Invalid+option+selected');
+  }
+
+  res.redirect('/viewelection/' + req.params.id + '?vote=success');
 });
 
 module.exports = router;

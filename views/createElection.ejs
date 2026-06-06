@@ -28,6 +28,22 @@
           <label for="description" class="form-label">Election Description</label>
           <textarea id="description" name="description" class="form-control" rows="4" required><%= formData.description || '' %></textarea>
         </div>
+        <section class="option-box">
+          <h2>Vote Options</h2>
+          <p>Enter at least two choices for voters to select from.</p>
+          <div class="mb-3">
+            <label for="option1" class="form-label">Option 1</label>
+            <input id="option1" name="options[]" type="text" class="form-control" required value="<%= (formData.options && formData.options[0]) || '' %>">
+          </div>
+          <div class="mb-3">
+            <label for="option2" class="form-label">Option 2</label>
+            <input id="option2" name="options[]" type="text" class="form-control" required value="<%= (formData.options && formData.options[1]) || '' %>">
+          </div>
+          <div class="mb-3">
+            <label for="option3" class="form-label">Option 3</label>
+            <input id="option3" name="options[]" type="text" class="form-control" value="<%= (formData.options && formData.options[2]) || '' %>">
+          </div>
+        </section>
         <button type="submit" class="btn btn-primary">Create Election</button>
       </form>
     </div>

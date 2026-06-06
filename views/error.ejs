@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./partials/head') -%>
+  <body>
+    <%- include('./partials/menu') -%>
+
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="error-card card shadow-lg border-danger">
+            <div class="card-body text-center">
+              <h1 class="error-status display-1 text-danger"><%= error.status || '500' %></h1>
+              <h2 class="error-message card-title mb-4"><%= message %></h2>
+              <p class="error-description text-muted mb-4">
+                <% if (error.status === 403) { %>
+                  You do not have permission to access this resource.
+                <% } else if (error.status === 404) { %>
+                  The page you are looking for could not be found.
+                <% } else { %>
+                  An error occurred while processing your request.
+                <% } %>
+              </p>
+              <% if (error.stack && error.stack.trim() !== '') { %>
+                <details class="text-start mt-4">
+                  <summary class="cursor-pointer text-muted">Technical Details</summary>
+                  <pre class="mt-2 p-3 bg-light rounded"><%= error.stack %></pre>
+                </details>
+              <% } %>
+              <div class="mt-4">
+                <a href="/dashboard" class="btn btn-primary me-2">Go to Dashboard</a>
+                <a href="/election" class="btn btn-secondary">View Elections</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
