@@ -8,11 +8,42 @@
       <h1>Election Details</h1>
       <div class="card">
         <div class="card-body">
+          <% var message = typeof message !== 'undefined' ? message : null; %>
+          <% var error = typeof error !== 'undefined' ? error : null; %>
           <h2 class="card-title"><%= election.title %></h2>
           <p class="card-text"><strong>ID:</strong> <%= election.election_id %></p>
           <p class="card-text"><strong>Description:</strong> <%= election.description %></p>
           <% if (election.specialWord) { %>
             <p class="card-text"><strong>Special Word:</strong> <span class="text-info"><%= election.specialWord %></span></p>
+          <% } %>
+          <% if (message) { %>
+            <div class="alert alert-success"><%= message %></div>
+          <% } %>
+          <% if (error) { %>
+            <div class="alert alert-danger"><%= error %></div>
+          <% } %>
+          <% if (election.options && election.options.length) { %>
+            <p class="card-text"><strong>Voting Options:</strong></p>
+            <form method="post" action="/viewelection/<%= election.election_id %>/vote">
+              <ul class="list-group mb-3">
+                <% election.options.forEach(function(option, idx) { %>
+                  <li class="list-group-item bg-transparent border-1 text-light d-flex justify-content-between align-items-center">
+                    <div>
+                      <% if (role === 'voter') { %>
+                        <input class="form-check-input me-2" type="radio" name="selectedOption" id="option<%= idx %>" value="<%= option %>" <%= idx === 0 ? 'checked' : '' %>>
+                      <% } %>
+                      <label class="form-check-label" for="option<%= idx %>"><%= option %></label>
+                    </div>
+                    <span class="badge bg-secondary"><%= (election.voteCounts && election.voteCounts[idx] != null) ? election.voteCounts[idx] : 0 %> votes</span>
+                  </li>
+                <% }); %>
+              </ul>
+              <% if (role === 'voter') { %>
+                <button type="submit" class="btn btn-primary">Cast Vote</button>
+              <% } else { %>
+                <div class="alert alert-info">Only voters can cast a ballot for this election.</div>
+              <% } %>
+            </form>
           <% } %>
           <p class="card-text"><strong>Created by:</strong> <%= election.createdBy %></p>
           <% if (role === 'voter') { %>

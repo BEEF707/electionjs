@@ -1,3 +1,4 @@
+
 :root {
   color-scheme: dark;
   color: #eef2f7;
@@ -160,35 +161,6 @@ form {
   line-height: 1.6;
 }
 
-.special-word-card {
-  background: rgba(34, 58, 92, 0.95);
-  border: 1px solid rgba(126, 203, 255, 0.18);
-  border-radius: 1.5rem;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 1.8rem;
-  box-shadow: 0 22px 48px rgba(5, 15, 32, 0.25);
-}
-
-.special-word-badge {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.5rem 0.8rem;
-  font-weight: 600;
-  border-radius: 999px;
-  box-shadow: inset 0 0 0.5rem rgba(255, 255, 255, 0.06);
-}
-
-.special-word-card h2 {
-  margin: 0 0 0.5rem;
-  color: #d8ebff;
-}
-
-.special-word-card p {
-  margin: 0;
-  color: #c8d9ed;
-  line-height: 1.7;
-}
-
 .election-card small {
   color: #9bb0c8;
 }
@@ -198,4 +170,45 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+/* Error Page Styling */
+.error-card {
+  background: linear-gradient(135deg, rgba(30, 50, 80, 0.9), rgba(20, 35, 60, 0.95));
+  border: 2px solid rgba(255, 110, 145, 0.3);
+}
+
+.error-status {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 8px rgba(255, 110, 145, 0.2);
+}
+
+.error-message {
+  font-size: 1.5rem;
+  color: #007bff;     
+  margin-bottom: 1.5rem;
+}
+
+.error-description {
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.error-card details {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(10, 20, 35, 0.5);
+  border-radius: 0.5rem;
+  border-left: 3px solid rgba(255, 110, 145, 0.5);
+}
+
+.error-card summary {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+.error-card summary:hover {
+  color: #7ecbff;
 }

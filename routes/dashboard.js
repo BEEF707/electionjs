@@ -28,17 +28,23 @@ router.get('/', requireLogin, function(req, res, next) {
 router.post('/changerole', requireLogin, function(req, res, next) {
   var currentUser = findUser(req.cookies.username);
   if (!currentUser || currentUser.role !== 'super') {
-    return res.status(403).send('Forbidden: only super users can change roles.');
+    var err = new Error('Forbidden: only super users can change roles.');
+    err.status = 403;
+    return next(err);
   }
 
   var username = req.body.username;
   var role = req.body.role;
   if (!allowedRoles.includes(role)) {
-    return res.status(400).send('Invalid role.');
+    var err = new Error('Invalid role.');
+    err.status = 400;
+    return next(err);
   }
 
   if (!updateRole(username, role)) {
-    return res.status(404).send('User not found.');
+    var err = new Error('User not found.');
+    err.status = 404;
+    return next(err);
   }
 
   res.redirect('/dashboard');

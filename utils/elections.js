@@ -13,7 +13,23 @@ function getElections() {
 }
 
 function addElection(election) {
+  if (election.options && !election.voteCounts) {
+    election.voteCounts = election.options.map(function() { return 0; });
+  }
   elections.push(election);
+  return election;
+}
+
+function voteElection(id, option) {
+  var election = findElection(id);
+  if (!election || !election.options || !election.voteCounts) {
+    return false;
+  }
+  var index = election.options.indexOf(option);
+  if (index === -1) {
+    return false;
+  }
+  election.voteCounts[index] += 1;
   return election;
 }
 
@@ -26,4 +42,5 @@ module.exports = {
   getElections,
   addElection,
   findElection,
+  voteElection,
 };
