@@ -1,20 +1,27 @@
-const assert = require('node:assert/strict');
-const test = require('node:test');
-
 const { API_BASE_URL } = require('../../../config/api');
 const { getWithBearerToken } = require('../../../utils/APIrequests');
 
-test('GET /info succeeds with bearer token', async () => {
-  const bearerToken = process.env.BEARER_TOKEN;
-  const url = `${API_BASE_URL}/info`;
+describe('API integration: info endpoints', () => {
+  let bearerToken;
 
-  assert.ok(bearerToken, 'BEARER_TOKEN must be set in .env');
+  beforeAll(() => {
+    bearerToken = process.env.BEARER_TOKEN;
 
-  const response = await getWithBearerToken(url, bearerToken);
+    expect(API_BASE_URL).toBeTruthy();
+    expect(bearerToken).toBeTruthy();
+  });
 
-  assert.ok(response, 'Expected a JSON response body');
+  describe('GET /info', () => {
+    it('returns a successful response using bearer token authentication', async () => {
+      const url = `${API_BASE_URL}/info`;
 
-  if (Object.hasOwn(response, 'success')) {
-    assert.equal(response.success, true, 'Expected response.success to be true');
-  }
+      const response = await getWithBearerToken(url, bearerToken);
+
+      expect(response).toBeTruthy();
+
+      if (Object.hasOwn(response, 'success')) {
+        expect(response.success).toBe(true);
+      }
+    });
+  });
 });
