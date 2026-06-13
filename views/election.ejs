@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <!-- head partial gets included here -->
+  <%- include('./partials/head') -%>
+  <body>
+    <!-- Include menu here -->
+    <%- include('./partials/menu') -%>
+
+    <div class="container mt-4">
+      <h1>Election view information</h1>
+      <p class="lead">Current role: <strong><%= role || 'unknown' %></strong></p>
+
+      <% if (restricted) { %>
+        <div class="alert alert-warning">
+          Moderators may access their Dashboard and History only. Election access is restricted.
+        </div>
+      <% } else { %>
+        <% if (!votingEnabled) { %>
+          <div class="alert alert-info">
+            Administrators can view elections but voting is disabled.
+          </div>
+        <% } %>
+
+        <% if (!ElectionsArray || ElectionsArray.length === 0) { %>
+          <div class="alert alert-secondary">No elections have been created yet.</div>
+        <% } else { %>
+          <div class="election-grid">
+            <% ElectionsArray.forEach(function(election) { %>
+              <article class="election-card" style="<%= election.cardStyle %>">
+                <div class="election-card-header">
+                  <h3><%= election.title %></h3>
+                  <span class="badge" style="<%= election.badgeStyle %>">ID <%= election.election_id %></span>
+                </div>
+                <p><%= election.description %></p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <a class="btn btn-sm btn-outline-light" href="/viewelection/<%= election.election_id %>">View</a>
+                  <small class="text-muted">Posted by <%= election.createdBy %></small>
+                </div>
+                <% if (election.specialWord) { %>
+                  <span class="badge special-word-badge" style="<%= election.badgeStyle %>"><%= election.specialWord %></span>
+                <% } %>
+              </article>
+            <% }); %>
+          </div>
+        <% } %>
+      <% } %>
+    </div>
+  </body>
+</html>

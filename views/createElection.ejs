@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <%- include('./partials/head') -%>
+  <body>
+    <%- include('./partials/menu') -%>
+
+    <div class="container mt-5">
+      <h1>Create Election</h1>
+      <% if (error) { %>
+        <div class="alert alert-danger"><%= error %></div>
+      <% } %>
+
+      <section class="special-word-card">
+        <h2>Special Word</h2>
+        <p>Choose one memorable word that captures the spirit of this election. It will appear as a quick theme tag and help voters understand the purpose instantly.</p>
+      </section>
+
+      <form method="post" action="/election/create">
+        <div class="mb-3">
+          <label for="specialWord" class="form-label">Special Word</label>
+          <input id="specialWord" name="specialWord" type="text" class="form-control" value="<%= formData.specialWord || '' %>" placeholder="e.g. leadership, change, unity">
+        </div>
+        <div class="mb-3">
+          <label for="title" class="form-label">Election Title</label>
+          <input id="title" name="title" type="text" class="form-control" required value="<%= formData.title || '' %>">
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Election Description</label>
+          <textarea id="description" name="description" class="form-control" rows="4" required><%= formData.description || '' %></textarea>
+        </div>
+        <section class="option-box">
+          <h2>Vote Options</h2>
+          <p>Enter at least two choices for voters to select from.</p>
+          <div class="mb-3">
+            <label for="option1" class="form-label">Option 1</label>
+            <input id="option1" name="options[]" type="text" class="form-control" required value="<%= (formData.options && formData.options[0]) || '' %>">
+          </div>
+          <div class="mb-3">
+            <label for="option2" class="form-label">Option 2</label>
+            <input id="option2" name="options[]" type="text" class="form-control" required value="<%= (formData.options && formData.options[1]) || '' %>">
+          </div>
+          <div class="mb-3">
+            <label for="option3" class="form-label">Option 3</label>
+            <input id="option3" name="options[]" type="text" class="form-control" value="<%= (formData.options && formData.options[2]) || '' %>">
+          </div>
+        </section>
+        <button type="submit" class="btn btn-primary">Create Election</button>
+      </form>
+    </div>
+  </body>
+</html>
